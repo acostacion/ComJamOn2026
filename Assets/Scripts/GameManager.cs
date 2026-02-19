@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+
     #region Propiedades
 
     public static GameManager instance = null;
@@ -12,8 +13,6 @@ public class GameManager : MonoBehaviour
     //Guardamos el nivel y si se ha completado o no
     //El primer nivel es el 1
     private Dictionary<int, bool> niveles;
-
-
     #endregion
 
     #region getters/Setters
@@ -57,13 +56,15 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        niveles = new Dictionary<int, bool>();
+
         //Inicializamos la lista de los niveles
         for (int i = 0; i < 3; i++)
             niveles.Add(i + 1, false);
     }
 
     //Cargamos una escena nueva
-    public void LoadScene(string scene)
+    public void LoadScene(int scene)
     {
         SceneManager.LoadScene(scene);
     } 

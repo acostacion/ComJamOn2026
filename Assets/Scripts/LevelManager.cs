@@ -31,5 +31,11 @@ public class LevelManager : MonoBehaviour
         objetivo = false;
     }
 
+    public void finish()
+    {
+        //Volvemos al menú de los mapas
+        GameManager.Instance.LoadScene(0);
+    }
+
     #endregion
 }
