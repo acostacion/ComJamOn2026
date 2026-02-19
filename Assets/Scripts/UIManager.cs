@@ -20,7 +20,20 @@ public class UIManager : MonoBehaviour
     {
         //Marcamos todos los menus como desactivados
         foreach (GameObject menu in menus)
+        {
             menu.SetActive(false);
+        }
+
+        //Cogemos los botones del mapa para marcar los que estén completados
+        Button[] b = menus[(int)GameManager.menus.MAP].GetComponentsInChildren<Button>();
+
+        for (int i = 0; i < b.Length; i++) {
+
+            if(GameManager.instance.GetLevel(i + 1))
+            {
+                b[i].Completado();
+            }
+        }
 
         UI = menus[GameManager.Instance.GetUi()];
         UI.SetActive(true);

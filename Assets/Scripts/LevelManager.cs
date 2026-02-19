@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour
 
     public void finish()
     {
+        GameManager.Instance.SetLevel(GameManager.Instance.GetActLevel(), true);
         //Volvemos al menú de los mapas
         GameManager.Instance.LoadScene(0);
     }

@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     //El primer nivel es el 1
     private Dictionary<int, bool> niveles;
 
+    private int level;
+
     //Guardamos que menu estaba antes de cambiar de escena
     public enum menus
     {
@@ -41,6 +43,8 @@ public class GameManager : MonoBehaviour
         if (niveles.ContainsKey(level))
             niveles[level] = value;
     }
+
+    public int GetActLevel() { return level; }
 
     public int GetUi()
     {
@@ -86,6 +90,7 @@ public class GameManager : MonoBehaviour
     //Cargamos una escena nueva
     public void LoadScene(int scene)
     {
+        level = scene;
         SceneManager.LoadScene(scene);
     } 
 
