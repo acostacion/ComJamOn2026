@@ -586,7 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3d1aa9d195a114cae11f2e36ce1aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Button
-  image: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 623e6d1b05124d84db8998bb96700667, type: 3}
 --- !u!1 &379620601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,8 +1061,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 938013445}
         m_TargetAssemblyTypeName: Button, Assembly-CSharp
-        m_MethodName: Completado
-        m_Mode: 1
+        m_MethodName: ChangeScene
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3d1aa9d195a114cae11f2e36ce1aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Button
-  image: {fileID: 21300000, guid: 623e6d1b05124d84db8998bb96700667, type: 3}
+  sprite: {fileID: 21300000, guid: 623e6d1b05124d84db8998bb96700667, type: 3}
 --- !u!1 &949463089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,7 +2022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3d1aa9d195a114cae11f2e36ce1aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Button
-  image: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 623e6d1b05124d84db8998bb96700667, type: 3}
 --- !u!1 &1967187309
 GameObject:
   m_ObjectHideFlags: 0
