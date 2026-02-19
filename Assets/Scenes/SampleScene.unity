@@ -1443,6 +1443,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a1a19df88453e4999c381976a6e2d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  menus:
+  - {fileID: 1440084687}
+  - {fileID: 379620601}
   mainMenu: {fileID: 1440084687}
   map: {fileID: 379620601}
 --- !u!4 &1352225906

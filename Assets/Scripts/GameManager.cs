@@ -13,6 +13,15 @@ public class GameManager : MonoBehaviour
     //Guardamos el nivel y si se ha completado o no
     //El primer nivel es el 1
     private Dictionary<int, bool> niveles;
+
+    //Guardamos que menu estaba antes de cambiar de escena
+    public enum menus
+    {
+        MAINMENU,
+        MAP
+    }
+
+    private int ui;
     #endregion
 
     #region getters/Setters
@@ -20,17 +29,27 @@ public class GameManager : MonoBehaviour
     static public GameManager Instance { get { return instance; } }
 
     //Devuelve si un nivel ha sido completado o no
-    public bool getLevel(int level)
+    public bool GetLevel(int level)
     {
         if (niveles.ContainsKey(level))
             return niveles[level];
         return false;
     }
 
-    public void setLevel(int level, bool value)
+    public void SetLevel(int level, bool value)
     {
         if (niveles.ContainsKey(level))
             niveles[level] = value;
+    }
+
+    public int GetUi()
+    {
+        return ui;
+    }
+
+    public void SetUi(int _ui)
+    {
+        ui = _ui;
     }
 
     #endregion
@@ -45,6 +64,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
+            ui = (int)menus.MAINMENU;   //Menu que tiene que salir al iniciar el juego
         }
         else
         {
