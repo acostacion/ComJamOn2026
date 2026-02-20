@@ -54,7 +54,6 @@ public class DragComponent : MonoBehaviour
             if (dist <= interactionDistance &&
                 Keyboard.current[interactKey].wasPressedThisFrame)
             {
-                Debug.Log("Cogiendo");
                 //Cogemos el objeto
                 grabbedByKey = true;
             }
