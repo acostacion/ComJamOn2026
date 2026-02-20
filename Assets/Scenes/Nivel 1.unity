@@ -1046,8 +1046,8 @@ Transform:
   m_GameObject: {fileID: 1044459910}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.22928, y: 129.235, z: 516}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.184, y: 1.601, z: 0.756}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1892654025}
@@ -1280,7 +1280,7 @@ Transform:
   m_GameObject: {fileID: 1634110529}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 136.32, z: -18.14}
+  m_LocalPosition: {x: -1.23, y: 2.13, z: -4.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1360,8 +1360,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   Teatro: {fileID: 0}
-  _dragPrefab: {fileID: 0}
-  _dropPrefab: {fileID: 0}
   Investigacion: {fileID: 0}
   Resolucion: {fileID: 0}
   _pieces:
@@ -1549,8 +1547,8 @@ Transform:
   m_GameObject: {fileID: 2053123884}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.22928, y: 129.235, z: 516}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.184, y: 1.601, z: 0.756}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 398090418}
@@ -1714,15 +1712,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5220357081595015578, guid: dcb0fdf4463122e4990a1b0c88d55c06, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 131.78954
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5220357081595015578, guid: dcb0fdf4463122e4990a1b0c88d55c06, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -42.19995
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5220357081595015578, guid: dcb0fdf4463122e4990a1b0c88d55c06, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 426.14038
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5220357081595015578, guid: dcb0fdf4463122e4990a1b0c88d55c06, type: 3}
       propertyPath: m_LocalRotation.w
