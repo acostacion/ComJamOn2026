@@ -10,7 +10,6 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField]
     GameObject Investigacion;   //Todo lo referente a la parte de moverse e interactuar
-    GameObject player;
 
     [SerializeField]
     GameObject Resolucion;
@@ -18,6 +17,8 @@ public class LevelManager : MonoBehaviour
     #endregion
 
     #region Propiedades
+    public static LevelManager instance = null;
+
     private const int LEVELS = 4; // niveles existentes
     // ----- DRAG AND DROP PHASE -----
     // TODO CAMBIAR ESTO SEGÚN LAS NECESIDADES DE DISEÑO.
@@ -69,7 +70,10 @@ public class LevelManager : MonoBehaviour
     }
 
     // ----- DRAG AND DROP PHASE -----
-    private void initializeDragDropPhase() {
+
+    #region Drag and Drop
+    private void initializeDragDropPhase()
+    {
         // numero del nivel.
         int nLevel = GameManager.instance.GetActLevel();
 
@@ -85,20 +89,25 @@ public class LevelManager : MonoBehaviour
     // Si las piezas colocadas es igual al numero que habia de piezas inicialmente,
     // que coincide con el numero de huecos también, quiere decir que todas las piezas
     // han sido colocadas.
-    private bool arePiecesPlaced() {
+    private bool arePiecesPlaced()
+    {
         return _placedPieces == _nPieces;
     }
 
     // comprueba si p y dz son "pareja" (deben conectarse).
-    private bool isWellConnected(GameObject p, GameObject dz) {
+    private bool isWellConnected(GameObject p, GameObject dz)
+    {
         bool pieceIndexFound = false;
         int i = 0;
         // busca el indice de la pieza.
-        while(i <  _pieces.Length && pieceIndexFound == false) {
-            if (_pieces[i] == p) {
+        while (i < _pieces.Length && pieceIndexFound == false)
+        {
+            if (_pieces[i] == p)
+            {
                 pieceIndexFound = true;
             }
-            else {
+            else
+            {
                 i++;
             }
         }
@@ -108,7 +117,8 @@ public class LevelManager : MonoBehaviour
     }
 
     // aumenta numero de piezas colocadas.
-    private void increaseWellPlacedPieces() {
+    private void increaseWellPlacedPieces()
+    {
         // este caso nunca debería suceder, pero lo hago por tener programación defensiva.
         if (_placedPieces >= _nPieces) { _placedPieces = _nPieces; }
         else { _placedPieces++; }
@@ -116,9 +126,11 @@ public class LevelManager : MonoBehaviour
 
     // DENISA Este metodo se llamara cuando se haga OnCollisionEnter con las piezas Drag and Drop
     // cuando una pieza es posicionada en el lugar correcto
-    public void placePiece(GameObject p, GameObject dz) {
+    public void placePiece(GameObject p, GameObject dz)
+    {
         // si la conexión es CORRECTA.....
-        if(isWellConnected(p, dz)) {
+        if (isWellConnected(p, dz))
+        {
             // deshabilita las colisiones y los componentes de ambos para que no siga contando ni se pueda arrastrar con el raton.
             p.GetComponent<MeshCollider>().enabled = false;
             p.GetComponent<DragComponent>().enabled = false;
@@ -130,25 +142,36 @@ public class LevelManager : MonoBehaviour
 
             increaseWellPlacedPieces();
         }
-        else {
+        else
+        {
             // TODO devuelve a la pieza a su posición original.
             // Se me ha ocurrido que se puede pasar la posicion original como parámetro y que haga un lerp hasta allí
         }
     }
+    #endregion
 
-    
     // -------------------------------
 
     // ----- ACTION PHASE -----
-    private void initializeActionPhase() {
+    #region Action
+    private void initializeActionPhase()
+    {
         // TODO
     }
+
+    #endregion
+
     // ------------------------
 
     // ----- RESOLUTION PHASE -----
-    private void initializeResolutionPhase() {
-        _objetivo = false;
+    #region Resolution
+    public void initializeResolutionPhase()
+    {
+        Debug.Log("Fase de resolución");
     }
+
+    #endregion
+
     // ----------------------------
 
     #endregion
