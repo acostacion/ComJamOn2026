@@ -333,6 +333,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93544273}
   m_CullTransparentMesh: 1
+--- !u!1 &107346321 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1543377282646766061, guid: c83e0c3d372f4da4e941c422c46061ec, type: 3}
+  m_PrefabInstance: {fileID: 423386876}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &119200992
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +417,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &147032592 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4120958010760760187, guid: c6a994491512dcd4d9631b81f07f8de5, type: 3}
+  m_PrefabInstance: {fileID: 5360381317056053204}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &177391224
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,6 +714,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260499127}
   m_CullTransparentMesh: 1
+--- !u!1 &279781081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4120958010760760187, guid: c6a994491512dcd4d9631b81f07f8de5, type: 3}
+  m_PrefabInstance: {fileID: 240168829}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &398090414 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1543377282646766061, guid: c83e0c3d372f4da4e941c422c46061ec, type: 3}
@@ -814,6 +829,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &566449864 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4120958010760760187, guid: c6a994491512dcd4d9631b81f07f8de5, type: 3}
+  m_PrefabInstance: {fileID: 22039108}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &831371265
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +1011,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c83e0c3d372f4da4e941c422c46061ec, type: 3}
+--- !u!1 &969664863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1543377282646766061, guid: c83e0c3d372f4da4e941c422c46061ec, type: 3}
+  m_PrefabInstance: {fileID: 965650510}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1027624449 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 260827223065770691, guid: c83e0c3d372f4da4e941c422c46061ec, type: 3}
@@ -1335,10 +1360,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   Teatro: {fileID: 0}
+  _dragPrefab: {fileID: 0}
+  _dropPrefab: {fileID: 0}
   Investigacion: {fileID: 0}
   Resolucion: {fileID: 0}
-  _pieces: []
-  _dropZones: []
+  _pieces:
+  - {fileID: 147032592}
+  - {fileID: 566449864}
+  - {fileID: 279781081}
+  _dropZones:
+  - {fileID: 398090414}
+  - {fileID: 969664863}
+  - {fileID: 107346321}
 --- !u!4 &1682720860
 Transform:
   m_ObjectHideFlags: 0

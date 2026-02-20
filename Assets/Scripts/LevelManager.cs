@@ -8,9 +8,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     GameObject Teatro;  //Todo lo referente a la parte del teatro
 
-    [SerializeField] private GameObject _dragPrefab;
-    [SerializeField] private GameObject _dropPrefab;
-
     [SerializeField]
     GameObject Investigacion;   //Todo lo referente a la parte de moverse e interactuar
     GameObject player;
