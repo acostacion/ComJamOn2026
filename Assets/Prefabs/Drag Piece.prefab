@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 8374035948564574727}
   - component: {fileID: 6857909561488576804}
   - component: {fileID: 1320770938181746860}
-  - component: {fileID: 1867378946433724522}
   - component: {fileID: 4272928877145847561}
+  - component: {fileID: 6390680833913916564}
   m_Layer: 0
-  m_Name: Drag Object
+  m_Name: Drag Piece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 4120958010760760187}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.3, y: 0.2218, z: -14.2}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: -12.7, y: 18.8, z: -14.3599}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -92,8 +92,23 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1867378946433724522
-SphereCollider:
+--- !u!114 &4272928877145847561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4120958010760760187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ee1d227b995274899b7d4cdc0be618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragComponent
+  targetObject: {fileID: 0}
+  minDragDistance: 0.1
+  camera: {fileID: 0}
+--- !u!64 &6390680833913916564
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -110,21 +125,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4272928877145847561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4120958010760760187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52ee1d227b995274899b7d4cdc0be618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DragComponent
-  targetObject: {fileID: 0}
-  minDragDistance: 0.1
-  camera: {fileID: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
