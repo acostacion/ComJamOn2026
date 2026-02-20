@@ -4,20 +4,22 @@ using UnityEngine.UIElements;
 
 public class DragComponent : MonoBehaviour
 {
-    [Tooltip("Object to move")] 
-    [SerializeField] private GameObject targetObject;
-
-    [Tooltip("Minimum distance until drag starts")] 
-    [SerializeField] private float minDragDistance = 0.1f;
-
     [Tooltip("Camera to calculate mouse position")] 
     [SerializeField] private Camera camera;
+
+    [SerializeField] private float interactionDistance = 2f;
+
+    private Key interactKey = Key.P;
+
+    private Transform player;
 
     private float fixedZ;
 
     private Vector3 mousePosition;
 
-    private bool isDraggable;
+    private bool grabbedByMouse;
+
+    private bool grabbedByKey;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,39 +29,81 @@ public class DragComponent : MonoBehaviour
 
         fixedZ = transform.position.z;
         mousePosition = Vector3.zero;
-        isDraggable = false;
+        grabbedByMouse = false;
+        grabbedByKey = false;
+
+        //Para gestionar si esta escena tiene player o no
+        if (player == null)
+        {
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null)
+                player = p.transform;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Ray ray = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit hit;
-
-        //Si pulso, vemos si estamos sobre un objeto
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        //Gestionamos desde la escena de gameplay
+        if(player != null)
         {
-            //Si coincide
-            if (Physics.Raycast(ray, out hit))
+            //Calculamos la distancia entre el jugador y el objeto
+            float dist = Vector3.Distance(player.position, transform.position);
+
+            //Si estamos a suficiente distancia y se pulsa la tecla
+            if (dist <= interactionDistance &&
+                Keyboard.current[interactKey].wasPressedThisFrame)
             {
-                if (hit.transform == transform)
+                Debug.Log("Cogiendo");
+                //Cogemos el objeto
+                grabbedByKey = true;
+            }
+
+            //Si tenemos un objeto agarrado y soltamos la tecla
+            else if (grabbedByKey &&
+                Keyboard.current[interactKey].wasReleasedThisFrame)
+            {
+                grabbedByKey = false;
+            }
+        }
+        else //Si no hay player se hace con el raton
+        {
+            Ray ray = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            RaycastHit hit;
+
+            //Si pulso, vemos si estamos sobre un objeto
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                //Si coincide
+                if (Physics.Raycast(ray, out hit))
                 {
-                    isDraggable = true;
+                    if (hit.transform == transform)
+                    {
+                        grabbedByMouse = true;
+                    }
                 }
             }
+            if (Mouse.current.leftButton.wasReleasedThisFrame)
+            {
+                grabbedByMouse = false;
+            }
+            
         }
 
         //Si mantengo pulsado en un objeto, lo arrastro
-        if (Mouse.current.leftButton.isPressed && isDraggable)
+        if (grabbedByMouse)
         {
             GetMousePosition();
             transform.position = new Vector3(mousePosition.x, mousePosition.y, fixedZ);
+            
         }
-        
-        if (Mouse.current.leftButton.wasReleasedThisFrame)
+
+        if (grabbedByKey)
         {
-            isDraggable = false;
+            transform.position = new Vector3(player.position.x, player.position.y, player.position.z - 10);
         }
+
+
     }
 
     Vector3 GetMousePosition()
