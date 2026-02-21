@@ -258,9 +258,9 @@ GameObject:
   - component: {fileID: 390891976}
   - component: {fileID: 390891975}
   - component: {fileID: 390891974}
-  - component: {fileID: 390891973}
   - component: {fileID: 390891972}
   - component: {fileID: 390891971}
+  - component: {fileID: 390891978}
   m_Layer: 0
   m_Name: "poci\xF3n (1)"
   m_TagString: Untagged
@@ -304,25 +304,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &390891973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 390891970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52ee1d227b995274899b7d4cdc0be618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DragComponent
-  camera: {fileID: 1401150742}
-  interactionDistance: 120
 --- !u!65 &390891974
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -410,12 +396,25 @@ Transform:
   m_GameObject: {fileID: 390891970}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.76, y: 1.52, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: 0.76, y: 1.487, z: -0.81}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &390891978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390891970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10f82e5f8fb23b47b970f1f776253b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrabComponent
+  interactionDistance: 1
 --- !u!1001 &635922455
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -427,6 +426,14 @@ PrefabInstance:
     - target: {fileID: 2587208493097380047, guid: dcb0fdf4463122e4990a1b0c88d55c06, type: 3}
       propertyPath: m_LocalScale.x
       value: 75.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3869916448363685132, guid: dcb0fdf4463122e4990a1b0c88d55c06, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 320.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3869916448363685132, guid: dcb0fdf4463122e4990a1b0c88d55c06, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -47.4
       objectReference: {fileID: 0}
     - target: {fileID: 5220357081595015578, guid: dcb0fdf4463122e4990a1b0c88d55c06, type: 3}
       propertyPath: m_LocalPosition.x
@@ -489,9 +496,9 @@ GameObject:
   - component: {fileID: 719467571}
   - component: {fileID: 719467570}
   - component: {fileID: 719467569}
-  - component: {fileID: 719467568}
   - component: {fileID: 719467573}
   - component: {fileID: 719467574}
+  - component: {fileID: 719467575}
   m_Layer: 0
   m_Name: "poci\xF3n"
   m_TagString: Untagged
@@ -499,20 +506,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &719467568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 719467567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52ee1d227b995274899b7d4cdc0be618, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DragComponent
-  camera: {fileID: 1401150742}
-  interactionDistance: 120
 --- !u!65 &719467569
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -600,8 +593,8 @@ Transform:
   m_GameObject: {fileID: 719467567}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.48, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: -0.815, y: 1.51, z: -0.86}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -628,7 +621,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
@@ -647,6 +640,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Return
   caldero: {fileID: 1009224167}
   color: Rojo
+--- !u!114 &719467575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719467567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10f82e5f8fb23b47b970f1f776253b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrabComponent
+  interactionDistance: 1
 --- !u!1 &918458574
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,7 +900,7 @@ Transform:
   m_GameObject: {fileID: 1009224167}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.86, y: 0.57, z: -0.421}
+  m_LocalPosition: {x: -2.73, y: 0.57, z: -0.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1164,7 +1170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6329e77b2bbd04e8aba49aa0c6adac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
-  vel: 50
+  vel: 5
 --- !u!1 &1401150740
 GameObject:
   m_ObjectHideFlags: 0

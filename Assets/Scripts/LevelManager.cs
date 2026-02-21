@@ -4,35 +4,33 @@ public class LevelManager : MonoBehaviour
 {
     //Controla todo lo que sucede en un nivel
     #region Referencias
+    // ----- DRAG AND DROP PHASE -----
+    [SerializeField] private GameObject[] _pieces; // las piezas en sí.
+    [SerializeField] private GameObject[] _dropZones; // las zonas de dropeo.
+    // -------------------------------
 
-    [SerializeField]
-    GameObject Teatro;  //Todo lo referente a la parte del teatro
+    // ----- ACTION PHASE -----
+    [SerializeField] private GameObject _player; // jugador
+    [SerializeField] private GameObject[] _elems; // todos los elementos de la action phase (pociones, enemigos) menos jugador.
+    // ------------------------
 
-    [SerializeField]
-    GameObject Investigacion;   //Todo lo referente a la parte de moverse e interactuar
-
-    [SerializeField]
-    GameObject Resolucion;
+    // ----- RESOLUTION PHASE -----
+    // ----------------------------
 
     #endregion
 
     #region Propiedades
     public static LevelManager instance = null;
 
-    private const int LEVELS = 4; // niveles existentes
     // ----- DRAG AND DROP PHASE -----
     // TODO CAMBIAR ESTO SEGÚN LAS NECESIDADES DE DISEÑO.
     private static readonly int[] _piecesPerLevel = { 3, 3, 3, 3 }; // piezas que hay por cada nivel ("array const")
 
     private int _nPieces; // numero de piezas draggables de este nivel (o de dropZones)
     private int _placedPieces; // piezas colocadas, incialmente cero.
-
-    [SerializeField] private GameObject[] _pieces; // las piezas en sí.
-    [SerializeField] private GameObject[] _dropZones; // las zonas de dropeo.
     // -------------------------------
 
     // ----- ACTION PHASE -----
-    // TODO meter cosas aqui de la action phase.
     // ------------------------
 
     // ----- RESOLUTION PHASE -----
@@ -55,8 +53,6 @@ public class LevelManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         initializeDragDropPhase();
-        initializeActionPhase();
-        initializeResolutionPhase();
     }
 
     private void Update()
@@ -82,6 +78,10 @@ public class LevelManager : MonoBehaviour
     // ----- DRAG AND DROP PHASE -----
 
     #region Drag and Drop
+    private void hideAll() {
+
+    }
+
     private void initializeDragDropPhase()
     {
         // numero del nivel. //TODO. NO HAY GM EN EL MENU DE PRUEBA, LO DEJO COMENTADO
@@ -99,24 +99,9 @@ public class LevelManager : MonoBehaviour
     // Si las piezas colocadas es igual al numero que habia de piezas inicialmente,
     // que coincide con el numero de huecos también, quiere decir que todas las piezas
     // han sido colocadas.
-    private bool arePiecesPlaced()
-    {
+    private bool arePiecesPlaced() {
         return _placedPieces == _nPieces;
     }
-
-    // comprueba si p y dz son "pareja" (deben conectarse).
-    private bool isWellConnected(GameObject p, GameObject dz)
-    {
-        DropComponent drop = dz.GetComponent<DropComponent>();
-
-        if (drop == null)
-        {
-            return false;
-        }
-
-        return drop.IsCorrectPiece(p);
-    }
-
 
     // aumenta numero de piezas colocadas.
     private void increaseWellPlacedPieces()
@@ -133,8 +118,7 @@ public class LevelManager : MonoBehaviour
         DropComponent drop = dz.GetComponent<DropComponent>();
         DragComponent drag = p.GetComponent<DragComponent>();
 
-        if (drop == null || drag == null)
-        {
+        if (drop == null || drag == null) {
             return;
         }
 
@@ -158,11 +142,10 @@ public class LevelManager : MonoBehaviour
 
             if (arePiecesPlaced())
             {
-                initializeResolutionPhase();
+                // Empieza la fase de ACTION.
             }
         }
-        else
-        {
+        else {
             drag.ReturnToOrigin();
         }
     }
@@ -174,7 +157,7 @@ public class LevelManager : MonoBehaviour
     #region Action
     private void initializeActionPhase()
     {
-        // TODO
+        Debug.Log("Fase de acción");
     }
 
     #endregion
