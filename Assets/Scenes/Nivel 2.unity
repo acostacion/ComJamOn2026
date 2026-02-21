@@ -805,9 +805,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407f1d4878bb914419a89d42c1185456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  Teatro: {fileID: 0}
-  Investigacion: {fileID: 0}
-  Resolucion: {fileID: 0}
+  _dragDropPhase: {fileID: 0}
+  _actionPhase: {fileID: 0}
+  _resolutionPhase: {fileID: 0}
 --- !u!4 &1244663714
 Transform:
   m_ObjectHideFlags: 0

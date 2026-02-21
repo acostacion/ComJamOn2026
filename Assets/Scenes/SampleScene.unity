@@ -587,6 +587,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Button
   sprite: {fileID: 21300000, guid: 623e6d1b05124d84db8998bb96700667, type: 3}
+  _camera: {fileID: 0}
+  _nScene: 0
 --- !u!1 &379620601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,6 +1124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Button
   sprite: {fileID: 21300000, guid: 623e6d1b05124d84db8998bb96700667, type: 3}
+  _camera: {fileID: 0}
+  _nScene: 0
 --- !u!1 &949463089
 GameObject:
   m_ObjectHideFlags: 0
@@ -1446,7 +1450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   menus:
-  - {fileID: 0}
+  - {fileID: 949463089}
   - {fileID: 379620601}
 --- !u!4 &1352225906
 Transform:
@@ -1991,6 +1995,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Button
   sprite: {fileID: 21300000, guid: 623e6d1b05124d84db8998bb96700667, type: 3}
+  _camera: {fileID: 0}
+  _nScene: 0
 --- !u!1 &1967187309
 GameObject:
   m_ObjectHideFlags: 0

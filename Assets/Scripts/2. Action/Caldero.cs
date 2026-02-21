@@ -37,8 +37,8 @@ public class Caldero : MonoBehaviour
 
         if (completo)
         {
-            //LevelManager.instance.initializeResolutionPhase();
-            Debug.Log("Completo");
+            LevelManager.instance.controlPhase(LevelManager.Phases.ACTION, false);
+            LevelManager.instance.controlPhase(LevelManager.Phases.RESOLUTION, true);
         }
 
     }

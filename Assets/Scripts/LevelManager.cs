@@ -99,7 +99,7 @@ public class LevelManager : MonoBehaviour {
         controlPhase(Phases.RESOLUTION, false);
     }
 
-    private void controlPhase(Phases p, bool activate) {
+    public void controlPhase(Phases p, bool activate) {
         // iteramos por todos los transform de los hijos porque todos los objetos de unity tienes transform y tal
         Transform fatherTF = _dragDropPhase.transform; // nota es drag drop hasta que en el switch se diga lo contrario...
 
@@ -178,10 +178,7 @@ public class LevelManager : MonoBehaviour {
 
     // ----- ACTION PHASE -----
     #region Action
-    private void initializeActionPhase()
-    {
-        Debug.Log("Fase de acción");
-    }
+  
 
     #endregion
 
@@ -189,10 +186,7 @@ public class LevelManager : MonoBehaviour {
 
     // ----- RESOLUTION PHASE -----
     #region Resolution
-    public void initializeResolutionPhase()
-    {
-        Debug.Log("Fase de resolución");
-    }
+  
 
     #endregion
 
