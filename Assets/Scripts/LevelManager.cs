@@ -42,6 +42,16 @@ public class LevelManager : MonoBehaviour
     #endregion
 
     #region Metodos
+
+    //Usado en drag como singleton
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         initializeDragDropPhase();
@@ -74,8 +84,8 @@ public class LevelManager : MonoBehaviour
     #region Drag and Drop
     private void initializeDragDropPhase()
     {
-        // numero del nivel.
-        int nLevel = GameManager.instance.GetActLevel();
+        // numero del nivel. //TODO. NO HAY GM EN EL MENU DE PRUEBA, LO DEJO COMENTADO
+        int nLevel = 1; //GameManager.Instance.GetActLevel();
 
         // inicialmente no hay piezas colocadas
         _placedPieces = 0;
@@ -83,7 +93,7 @@ public class LevelManager : MonoBehaviour
         // *En gamemanager pone k el primer nivel es el 1.
         // ASIGNA NUMERO DE DRAGGABLES Y OTRAS MOVIDAS (TODO) SEGUN EL NIVEL.
         /* 1-BRUJA, 2-RELOJERO, 3-CASTILLO, 4-FRANKENSTEIN(FINAL) */
-        _nPieces = _piecesPerLevel[nLevel];
+        _nPieces = _piecesPerLevel[nLevel - 1];
     }
 
     // Si las piezas colocadas es igual al numero que habia de piezas inicialmente,
@@ -97,24 +107,16 @@ public class LevelManager : MonoBehaviour
     // comprueba si p y dz son "pareja" (deben conectarse).
     private bool isWellConnected(GameObject p, GameObject dz)
     {
-        bool pieceIndexFound = false;
-        int i = 0;
-        // busca el indice de la pieza.
-        while (i < _pieces.Length && pieceIndexFound == false)
+        DropComponent drop = dz.GetComponent<DropComponent>();
+
+        if (drop == null)
         {
-            if (_pieces[i] == p)
-            {
-                pieceIndexFound = true;
-            }
-            else
-            {
-                i++;
-            }
+            return false;
         }
 
-        // si coinciden en indices, es que las piezas son "pareja"
-        return _dropZones[i] == dz;
+        return drop.IsCorrectPiece(p);
     }
+
 
     // aumenta numero de piezas colocadas.
     private void increaseWellPlacedPieces()
@@ -124,28 +126,44 @@ public class LevelManager : MonoBehaviour
         else { _placedPieces++; }
     }
 
-    // DENISA Este metodo se llamara cuando se haga OnCollisionEnter con las piezas Drag and Drop
+    // Este metodo se llamara cuando se haga OnCollisionEnter con las piezas Drag and Drop
     // cuando una pieza es posicionada en el lugar correcto
     public void placePiece(GameObject p, GameObject dz)
     {
-        // si la conexión es CORRECTA.....
-        if (isWellConnected(p, dz))
-        {
-            // deshabilita las colisiones y los componentes de ambos para que no siga contando ni se pueda arrastrar con el raton.
-            p.GetComponent<MeshCollider>().enabled = false;
-            p.GetComponent<DragComponent>().enabled = false;
-            dz.GetComponent<BoxCollider>().enabled = false;
+        DropComponent drop = dz.GetComponent<DropComponent>();
+        DragComponent drag = p.GetComponent<DragComponent>();
 
-            // pone la drag piece en la place zone un poco por delante...
-            p.transform.position = dz.transform.position;
-            p.transform.position = new Vector3(p.transform.position.x, p.transform.position.y, p.transform.position.z + 1);
+        if (drop == null || drag == null)
+        {
+            return;
+        }
+
+        // si es correcta y la zona está libre
+        if (drop.IsCorrectPiece(p) && !drop.IsOccupied)
+        {
+            // colocar
+            drop.PlaceObject(p.transform);
+
+            // bloquear pieza
+            MeshCollider col = p.GetComponent<MeshCollider>();
+            if (col != null) col.enabled = false;
+
+            drag.enabled = false;
+
+            // bloquear zona
+            BoxCollider dzCol = dz.GetComponent<BoxCollider>();
+            if (dzCol != null) dzCol.enabled = false;
 
             increaseWellPlacedPieces();
+
+            if (arePiecesPlaced())
+            {
+                initializeResolutionPhase();
+            }
         }
         else
         {
-            // TODO devuelve a la pieza a su posición original.
-            // Se me ha ocurrido que se puede pasar la posicion original como parámetro y que haga un lerp hasta allí
+            drag.ReturnToOrigin();
         }
     }
     #endregion

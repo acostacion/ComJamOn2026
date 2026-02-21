@@ -7,6 +7,7 @@ public class DragComponent : MonoBehaviour
     [Tooltip("Camera to calculate mouse position")] 
     [SerializeField] private Camera camera;
 
+    [Tooltip("Minimum distance for interaction")]
     [SerializeField] private float interactionDistance = 2f;
 
     private Key interactKey = Key.P;
@@ -21,6 +22,10 @@ public class DragComponent : MonoBehaviour
 
     private bool grabbedByKey;
 
+    private Vector3 originalPosition;
+
+    private DropComponent currentZone;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +36,7 @@ public class DragComponent : MonoBehaviour
         mousePosition = Vector3.zero;
         grabbedByMouse = false;
         grabbedByKey = false;
+        originalPosition = transform.position;
 
         //Para gestionar si esta escena tiene player o no
         if (player == null)
@@ -63,6 +69,7 @@ public class DragComponent : MonoBehaviour
                 Keyboard.current[interactKey].wasReleasedThisFrame)
             {
                 grabbedByKey = false;
+                //TryDrop();
             }
         }
         else //Si no hay player se hace con el raton
@@ -85,6 +92,7 @@ public class DragComponent : MonoBehaviour
             if (Mouse.current.leftButton.wasReleasedThisFrame)
             {
                 grabbedByMouse = false;
+                TryDrop();
             }
             
         }
@@ -101,8 +109,6 @@ public class DragComponent : MonoBehaviour
         {
             transform.position = new Vector3(player.position.x, player.position.y, player.position.z - 10);
         }
-
-
     }
 
     Vector3 GetMousePosition()
@@ -118,5 +124,43 @@ public class DragComponent : MonoBehaviour
         }
 
         return mousePosition;
+    }
+
+    void TryDrop()
+    {
+        if (currentZone != null)
+        {
+            LevelManager.instance.placePiece(gameObject, currentZone.gameObject);
+        }
+        else
+        {
+            ReturnToOrigin();
+        }
+    }
+
+    public void ReturnToOrigin()
+    {
+        // Si no hay zona de drop, volver al origen
+        transform.position = originalPosition;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        DropComponent zone = other.GetComponent<DropComponent>();
+
+        if (zone != null)
+        {
+            currentZone = zone;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        DropComponent zone = other.GetComponent<DropComponent>();
+
+        if (zone != null && currentZone == zone)
+        {
+            currentZone = null;
+        }
     }
 }
