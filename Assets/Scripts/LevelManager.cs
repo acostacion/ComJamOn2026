@@ -1,21 +1,19 @@
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
-{
+public class LevelManager : MonoBehaviour {
+    public enum Phases { DRAGDROP, ACTION, RESOLUTION}
+
     //Controla todo lo que sucede en un nivel
     #region Referencias
-    // ----- DRAG AND DROP PHASE -----
-    [SerializeField] private GameObject[] _pieces; // las piezas en sí.
-    [SerializeField] private GameObject[] _dropZones; // las zonas de dropeo.
-    // -------------------------------
+    // ----- PHASES -----
+    // Objetos que contienen dentro todos los elementos de cada fase (para activar y desactivar los hijos).
+    public GameObject _dragDropPhase;
+    public GameObject _actionPhase;
+    public GameObject _resolutionPhase;
+    // NOTA: son publicas por si se necesitan en otro script.
+    // ------------------
 
-    // ----- ACTION PHASE -----
-    [SerializeField] private GameObject _player; // jugador
-    [SerializeField] private GameObject[] _elems; // todos los elementos de la action phase (pociones, enemigos) menos jugador.
-    // ------------------------
-
-    // ----- RESOLUTION PHASE -----
-    // ----------------------------
+    // [SerializeField] private GameObject _player; // jugador
 
     #endregion
 
@@ -50,9 +48,20 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start() {
-        initializeDragDropPhase();
+        // numero del nivel. //TODO. NO HAY GM EN EL MENU DE PRUEBA, LO DEJO COMENTADO
+        int nLevel = 1; //GameManager.Instance.GetActLevel();
+
+        // inicialmente no hay piezas colocadas
+        _placedPieces = 0;
+
+        // *En gamemanager pone k el primer nivel es el 1.
+        // ASIGNA NUMERO DE DRAGGABLES Y OTRAS MOVIDAS (TODO) SEGUN EL NIVEL.
+        /* 1-BRUJA, 2-RELOJERO, 3-CASTILLO, 4-FRANKENSTEIN(FINAL) */
+        _nPieces = _piecesPerLevel[nLevel - 1];
+
+        startLevel();
     }
 
     private void Update()
@@ -78,22 +87,35 @@ public class LevelManager : MonoBehaviour
     // ----- DRAG AND DROP PHASE -----
 
     #region Drag and Drop
-    private void hideAll() {
 
+    // ESTADO INICIAL:
+    // 1. DRAG DROP ACTIVA
+    // 2. ACTION DESACTIVADA
+    // 3. RESOLUTION DESACTIVADA
+    private void startLevel()
+    {
+        controlPhase(Phases.DRAGDROP, true);
+        controlPhase(Phases.ACTION, false);
+        controlPhase(Phases.RESOLUTION, false);
     }
 
-    private void initializeDragDropPhase()
-    {
-        // numero del nivel. //TODO. NO HAY GM EN EL MENU DE PRUEBA, LO DEJO COMENTADO
-        int nLevel = 1; //GameManager.Instance.GetActLevel();
+    private void controlPhase(Phases p, bool activate) {
+        // iteramos por todos los transform de los hijos porque todos los objetos de unity tienes transform y tal
+        Transform fatherTF = _dragDropPhase.transform; // nota es drag drop hasta que en el switch se diga lo contrario...
 
-        // inicialmente no hay piezas colocadas
-        _placedPieces = 0;
+        switch (p) {
+            case Phases.ACTION:
+                fatherTF = _actionPhase.transform;
+                break;
+            case Phases.RESOLUTION: 
+                fatherTF = _resolutionPhase.transform;
+                break;
+            default:break;
+        }
 
-        // *En gamemanager pone k el primer nivel es el 1.
-        // ASIGNA NUMERO DE DRAGGABLES Y OTRAS MOVIDAS (TODO) SEGUN EL NIVEL.
-        /* 1-BRUJA, 2-RELOJERO, 3-CASTILLO, 4-FRANKENSTEIN(FINAL) */
-        _nPieces = _piecesPerLevel[nLevel - 1];
+        for (int i = 0; i < fatherTF.childCount; i++) {
+            fatherTF.GetChild(i).gameObject.SetActive(activate); // elige si se esconde o se muestra.
+        }
     }
 
     // Si las piezas colocadas es igual al numero que habia de piezas inicialmente,
@@ -142,7 +164,8 @@ public class LevelManager : MonoBehaviour
 
             if (arePiecesPlaced())
             {
-                // Empieza la fase de ACTION.
+                controlPhase(Phases.DRAGDROP, false);
+                controlPhase(Phases.ACTION, true);
             }
         }
         else {
