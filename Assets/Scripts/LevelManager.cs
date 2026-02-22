@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour {
     
     void Start() {
         // numero del nivel. //TODO. NO HAY GM EN EL MENU DE PRUEBA, LO DEJO COMENTADO
-        int nLevel = 1; //GameManager.Instance.GetActLevel();
+        int nLevel = 2; //GameManager.Instance.GetActLevel();
 
         // inicialmente no hay piezas colocadas
         _placedPieces = 0;
@@ -96,18 +96,24 @@ public class LevelManager : MonoBehaviour {
         Transform fatherTF = _dragDropPhase.transform; // nota es drag drop hasta que en el switch se diga lo contrario...
 
         switch (p) {
+            case Phases.DRAGDROP:
+                _dragDropPhase.SetActive(activate);
+                break;
             case Phases.ACTION:
                 fatherTF = _actionPhase.transform;
+                _actionPhase.SetActive(activate);
                 break;
             case Phases.RESOLUTION: 
                 fatherTF = _resolutionPhase.transform;
+                _resolutionPhase.SetActive(activate);
                 break;
             default:break;
         }
-
+        /*
         for (int i = 0; i < fatherTF.childCount; i++) {
             fatherTF.GetChild(i).gameObject.SetActive(activate); // elige si se esconde o se muestra.
         }
+        */
     }
 
     // Si las piezas colocadas es igual al numero que habia de piezas inicialmente,
