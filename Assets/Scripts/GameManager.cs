@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     private Dictionary<int, bool> niveles;
 
     private int level;
+    [SerializeField] private int numLevels;
+    [SerializeField] private GameObject levels;
 
     //Guardamos que menu estaba antes de cambiar de escena
     public enum menus
@@ -54,6 +56,19 @@ public class GameManager : MonoBehaviour
     public void SetUi(int _ui)
     {
         ui = _ui;
+
+        switch (ui)
+        {
+            case (int)menus.MAP:
+                //instanciamos las cajas de los niveles
+                for (int i = 0; i < numLevels; i++)
+                {
+                    Vector3 pos = new Vector3(0, 0, 0);
+                    Quaternion rot = new Quaternion(0, 0, 0, 0);
+                    Instantiate(levels, pos, rot);
+                }
+                break;
+        }
     }
 
     #endregion
@@ -83,7 +98,7 @@ public class GameManager : MonoBehaviour
         niveles = new Dictionary<int, bool>();
 
         //Inicializamos la lista de los niveles
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < numLevels; i++)
             niveles.Add(i + 1, false);
     }
 
@@ -91,6 +106,11 @@ public class GameManager : MonoBehaviour
     public void LoadScene(int scene)
     {
         level = scene;
+
+        // cambia musica
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.PlayMusicForScene(scene);
+
         SceneManager.LoadScene(scene);
     } 
 
