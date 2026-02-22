@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class GameManager : MonoBehaviour
     //El primer nivel es el 1
     private Dictionary<int, bool> niveles;
 
-    private int level;
-    [SerializeField] private int numLevels;
+    private int level;  
+    [SerializeField] private GameObject[] Levels;
     [SerializeField] private GameObject levels;
 
     //Guardamos que menu estaba antes de cambiar de escena
@@ -60,14 +61,12 @@ public class GameManager : MonoBehaviour
         switch (ui)
         {
             case (int)menus.MAP:
-                //instanciamos las cajas de los niveles
-                for (int i = 0; i < numLevels; i++)
+                for (int i = 0; i < Levels.Length; i++)
                 {
-                    Vector3 pos = new Vector3(0, 0, 0);
-                    Quaternion rot = new Quaternion(0, 0, 0, 0);
-                    Instantiate(levels, pos, rot);
+                    Levels[i].SetActive(true);
                 }
-                break;
+                    
+            break;
         }
     }
 
@@ -98,7 +97,7 @@ public class GameManager : MonoBehaviour
         niveles = new Dictionary<int, bool>();
 
         //Inicializamos la lista de los niveles
-        for (int i = 0; i < numLevels; i++)
+        for (int i = 0; i < Levels.Length; i++)
             niveles.Add(i + 1, false);
     }
 
