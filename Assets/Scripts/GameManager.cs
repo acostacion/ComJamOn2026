@@ -106,6 +106,11 @@ public class GameManager : MonoBehaviour
     public void LoadScene(int scene)
     {
         level = scene;
+
+        // cambia musica
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.PlayMusicForScene(scene);
+
         SceneManager.LoadScene(scene);
     } 
 
