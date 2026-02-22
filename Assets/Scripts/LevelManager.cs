@@ -1,38 +1,34 @@
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
-{
+public class LevelManager : MonoBehaviour {
+    public enum Phases { DRAGDROP, ACTION, RESOLUTION}
+
     //Controla todo lo que sucede en un nivel
     #region Referencias
+    // ----- PHASES -----
+    // Objetos que contienen dentro todos los elementos de cada fase (para activar y desactivar los hijos).
+    public GameObject _dragDropPhase;
+    public GameObject _actionPhase;
+    public GameObject _resolutionPhase;
+    // NOTA: son publicas por si se necesitan en otro script.
+    // ------------------
 
-    [SerializeField]
-    GameObject Teatro;  //Todo lo referente a la parte del teatro
-
-    [SerializeField]
-    GameObject Investigacion;   //Todo lo referente a la parte de moverse e interactuar
-
-    [SerializeField]
-    GameObject Resolucion;
+    // [SerializeField] private GameObject _player; // jugador
 
     #endregion
 
     #region Propiedades
     public static LevelManager instance = null;
 
-    private const int LEVELS = 4; // niveles existentes
     // ----- DRAG AND DROP PHASE -----
     // TODO CAMBIAR ESTO SEGÚN LAS NECESIDADES DE DISEÑO.
     private static readonly int[] _piecesPerLevel = { 3, 3, 3, 3 }; // piezas que hay por cada nivel ("array const")
 
     private int _nPieces; // numero de piezas draggables de este nivel (o de dropZones)
     private int _placedPieces; // piezas colocadas, incialmente cero.
-
-    [SerializeField] private GameObject[] _pieces; // las piezas en sí.
-    [SerializeField] private GameObject[] _dropZones; // las zonas de dropeo.
     // -------------------------------
 
     // ----- ACTION PHASE -----
-    // TODO meter cosas aqui de la action phase.
     // ------------------------
 
     // ----- RESOLUTION PHASE -----
@@ -42,11 +38,30 @@ public class LevelManager : MonoBehaviour
     #endregion
 
     #region Metodos
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    //Usado en drag como singleton
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+
+    
     void Start() {
-        initializeDragDropPhase();
-        initializeActionPhase();
-        initializeResolutionPhase();
+        // numero del nivel. //TODO. NO HAY GM EN EL MENU DE PRUEBA, LO DEJO COMENTADO
+        int nLevel = 1; //GameManager.Instance.GetActLevel();
+
+        // inicialmente no hay piezas colocadas
+        _placedPieces = 0;
+
+        // *En gamemanager pone k el primer nivel es el 1.
+        // ASIGNA NUMERO DE DRAGGABLES Y OTRAS MOVIDAS (TODO) SEGUN EL NIVEL.
+        /* 1-BRUJA, 2-RELOJERO, 3-CASTILLO, 4-FRANKENSTEIN(FINAL) */
+        _nPieces = _piecesPerLevel[nLevel - 1];
+
+        startLevel();
     }
 
     private void Update()
@@ -72,48 +87,42 @@ public class LevelManager : MonoBehaviour
     // ----- DRAG AND DROP PHASE -----
 
     #region Drag and Drop
-    private void initializeDragDropPhase()
+
+    // ESTADO INICIAL:
+    // 1. DRAG DROP ACTIVA
+    // 2. ACTION DESACTIVADA
+    // 3. RESOLUTION DESACTIVADA
+    private void startLevel()
     {
-        // numero del nivel.
-        int nLevel = GameManager.instance.GetActLevel();
+        controlPhase(Phases.DRAGDROP, true);
+        controlPhase(Phases.ACTION, false);
+        controlPhase(Phases.RESOLUTION, false);
+    }
 
-        // inicialmente no hay piezas colocadas
-        _placedPieces = 0;
+    public void controlPhase(Phases p, bool activate) {
+        // iteramos por todos los transform de los hijos porque todos los objetos de unity tienes transform y tal
+        Transform fatherTF = _dragDropPhase.transform; // nota es drag drop hasta que en el switch se diga lo contrario...
 
-        // *En gamemanager pone k el primer nivel es el 1.
-        // ASIGNA NUMERO DE DRAGGABLES Y OTRAS MOVIDAS (TODO) SEGUN EL NIVEL.
-        /* 1-BRUJA, 2-RELOJERO, 3-CASTILLO, 4-FRANKENSTEIN(FINAL) */
-        _nPieces = _piecesPerLevel[nLevel];
+        switch (p) {
+            case Phases.ACTION:
+                fatherTF = _actionPhase.transform;
+                break;
+            case Phases.RESOLUTION: 
+                fatherTF = _resolutionPhase.transform;
+                break;
+            default:break;
+        }
+
+        for (int i = 0; i < fatherTF.childCount; i++) {
+            fatherTF.GetChild(i).gameObject.SetActive(activate); // elige si se esconde o se muestra.
+        }
     }
 
     // Si las piezas colocadas es igual al numero que habia de piezas inicialmente,
     // que coincide con el numero de huecos también, quiere decir que todas las piezas
     // han sido colocadas.
-    private bool arePiecesPlaced()
-    {
+    private bool arePiecesPlaced() {
         return _placedPieces == _nPieces;
-    }
-
-    // comprueba si p y dz son "pareja" (deben conectarse).
-    private bool isWellConnected(GameObject p, GameObject dz)
-    {
-        bool pieceIndexFound = false;
-        int i = 0;
-        // busca el indice de la pieza.
-        while (i < _pieces.Length && pieceIndexFound == false)
-        {
-            if (_pieces[i] == p)
-            {
-                pieceIndexFound = true;
-            }
-            else
-            {
-                i++;
-            }
-        }
-
-        // si coinciden en indices, es que las piezas son "pareja"
-        return _dropZones[i] == dz;
     }
 
     // aumenta numero de piezas colocadas.
@@ -124,28 +133,43 @@ public class LevelManager : MonoBehaviour
         else { _placedPieces++; }
     }
 
-    // DENISA Este metodo se llamara cuando se haga OnCollisionEnter con las piezas Drag and Drop
+    // Este metodo se llamara cuando se haga OnCollisionEnter con las piezas Drag and Drop
     // cuando una pieza es posicionada en el lugar correcto
     public void placePiece(GameObject p, GameObject dz)
     {
-        // si la conexión es CORRECTA.....
-        if (isWellConnected(p, dz))
-        {
-            // deshabilita las colisiones y los componentes de ambos para que no siga contando ni se pueda arrastrar con el raton.
-            p.GetComponent<MeshCollider>().enabled = false;
-            p.GetComponent<DragComponent>().enabled = false;
-            dz.GetComponent<BoxCollider>().enabled = false;
+        DropComponent drop = dz.GetComponent<DropComponent>();
+        DragComponent drag = p.GetComponent<DragComponent>();
 
-            // pone la drag piece en la place zone un poco por delante...
-            p.transform.position = dz.transform.position;
-            p.transform.position = new Vector3(p.transform.position.x, p.transform.position.y, p.transform.position.z + 1);
+        if (drop == null || drag == null) {
+            return;
+        }
+
+        // si es correcta y la zona está libre
+        if (drop.IsCorrectPiece(p) && !drop.IsOccupied)
+        {
+            // colocar
+            drop.PlaceObject(p.transform);
+
+            // bloquear pieza
+            MeshCollider col = p.GetComponent<MeshCollider>();
+            if (col != null) col.enabled = false;
+
+            drag.enabled = false;
+
+            // bloquear zona
+            BoxCollider dzCol = dz.GetComponent<BoxCollider>();
+            if (dzCol != null) dzCol.enabled = false;
 
             increaseWellPlacedPieces();
+
+            if (arePiecesPlaced())
+            {
+                controlPhase(Phases.DRAGDROP, false);
+                controlPhase(Phases.ACTION, true);
+            }
         }
-        else
-        {
-            // TODO devuelve a la pieza a su posición original.
-            // Se me ha ocurrido que se puede pasar la posicion original como parámetro y que haga un lerp hasta allí
+        else {
+            drag.ReturnToOrigin();
         }
     }
     #endregion
@@ -154,10 +178,7 @@ public class LevelManager : MonoBehaviour
 
     // ----- ACTION PHASE -----
     #region Action
-    private void initializeActionPhase()
-    {
-        // TODO
-    }
+  
 
     #endregion
 
@@ -165,10 +186,7 @@ public class LevelManager : MonoBehaviour
 
     // ----- RESOLUTION PHASE -----
     #region Resolution
-    public void initializeResolutionPhase()
-    {
-        Debug.Log("Fase de resolución");
-    }
+  
 
     #endregion
 
