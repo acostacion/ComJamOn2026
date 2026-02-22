@@ -20,6 +20,18 @@ public class EnemyComponent : MonoBehaviour
     [SerializeField] private int _damage = 1;
     private float _cooldown;
 
+    private bool attacking = false;
+
+
+    public int getDamage()
+    {
+        return _damage;
+    }
+    public bool getAttacking()
+    {
+        return attacking;
+    }
+
     void Start() {
         _tf = GetComponent<Transform>();
 
@@ -54,12 +66,14 @@ public class EnemyComponent : MonoBehaviour
 
     private void attack() {
         //Activamos el trigger del arma
+        attacking = true;
         _triggerArma.SetActive(true);
         Invoke(nameof(deactivateWeapon), 0.5f); // no se desactiva hasta pasados 3 segundos.
     }
 
     private void deactivateWeapon() {
         _triggerArma.SetActive(false);
+        attacking = false;
     }
     
 }

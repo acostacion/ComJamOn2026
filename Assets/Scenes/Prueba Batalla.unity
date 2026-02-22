@@ -535,9 +535,9 @@ GameObject:
   - component: {fileID: 1072257450}
   - component: {fileID: 1072257449}
   - component: {fileID: 1072257448}
+  - component: {fileID: 1072257453}
   - component: {fileID: 1072257447}
   - component: {fileID: 1072257452}
-  - component: {fileID: 1072257453}
   - component: {fileID: 1072257454}
   m_Layer: 0
   m_Name: PJ
@@ -558,6 +558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6329e77b2bbd04e8aba49aa0c6adac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
+  moveInput: {x: 0, y: 0}
   vel: 5
   canFlip: 0
 --- !u!143 &1072257448
@@ -578,8 +579,8 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 12
-  m_Radius: 2.4
+  m_Height: 26.6
+  m_Radius: 6.51
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -1055,7 +1056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 996297d1a3f43a94abf2fa9d1537b704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  vida: 3
+  vida: 10
 --- !u!4 &1415301050 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a015090b32ad82849bbc1619e4b5f33d, type: 3}
@@ -1395,8 +1396,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 12.326163, y: 1.4176422, z: 22.731922}
+  m_Center: {x: 3.3014977, y: -0.20882551, z: 1.8925486}
 --- !u!23 &1727269456
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1560,8 +1561,8 @@ Transform:
   m_GameObject: {fileID: 1804927596}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.025351431, y: 0.012285717, z: 0.0018428583}
-  m_LocalScale: {x: 0.015095458, y: 0.014669906, z: 0.005714284}
+  m_LocalPosition: {x: -0.0326, y: 0.012285717, z: 0.0018428583}
+  m_LocalScale: {x: 0.02433388, y: 0.06499795, z: 0.005714284}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1415301050}
@@ -1680,16 +1681,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a015090b32ad82849bbc1619e4b5f33d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1415301047}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a015090b32ad82849bbc1619e4b5f33d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1415301046}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a015090b32ad82849bbc1619e4b5f33d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1415301045}
+      addedObject: {fileID: 1415301044}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a015090b32ad82849bbc1619e4b5f33d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1415301044}
+      addedObject: {fileID: 1415301047}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a015090b32ad82849bbc1619e4b5f33d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1415301045}
   m_SourcePrefab: {fileID: 100100000, guid: a015090b32ad82849bbc1619e4b5f33d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

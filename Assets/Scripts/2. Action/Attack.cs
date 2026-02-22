@@ -19,6 +19,11 @@ public class Attack : MonoBehaviour
         return damage;
     }
 
+    public bool getAttacking()
+    {
+        return attacking;
+    }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,8 +40,15 @@ public class Attack : MonoBehaviour
     IEnumerator Ataque()
     {
         //Activamos el trigger del arma
+        attacking = true;
         triggerArma.SetActive(true);
         yield return new WaitForSeconds(0.5f); // Espera 3 segundos
+        triggerArma.SetActive(false);
+        attacking=false;
+    }
+
+    public void Atacado()
+    {
         triggerArma.SetActive(false);
     }
 }
