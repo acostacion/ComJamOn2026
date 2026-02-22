@@ -66,15 +66,7 @@ public class LevelManager : MonoBehaviour {
 
     private void Update()
     {
-        // TODO no se si las coass de colisiones iban aqui ayuda :((
-
-        // TODO lógica de si p ha palpado la zona de la dropzone.....
-        // quiero hacer que cuando se detecte la colision pase un metodo 
-
-        // TODO cómo hacemos que la pieza se ha colocado en el lugar correcto??
-        // hacemos que correspondan con el índice de los arrays?
-        // es decir:
-        // _pioces[0] se corresponde con _dropZones[0] y así sucesivamente
+     
     }
 
     public void finish()
@@ -183,14 +175,6 @@ public class LevelManager : MonoBehaviour {
     #endregion
 
     // ------------------------
-
-    // ----- RESOLUTION PHASE -----
-    #region Resolution
-  
-
-    #endregion
-
-    // ----------------------------
 
     #endregion
 }
