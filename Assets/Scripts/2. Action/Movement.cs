@@ -35,7 +35,8 @@ public class Movement : MonoBehaviour
         transform.position = new Vector3(transform.position.x, posY, posZ);
 
         // Animacion
-        animator.SetFloat("Speed", Mathf.Abs(moveInput.x));
+        if(animator != null )
+            animator.SetFloat("Speed", Mathf.Abs(moveInput.x));
 
         // Flip sprite
         if (canFlip && moveInput.x != flip && moveInput.x != 0)

@@ -16,19 +16,35 @@ public class Health : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponentInParent<Attack>() != null)
-        {
+        if (other.transform.root == transform.root) return;
+
+        Debug.Log(this.name + vidaact);
+        if (other.GetComponentInParent<Attack>() != null
+            && other.GetComponentInParent<Attack>().getAttacking())
+        { 
+            Debug.Log("Pega el player");
+        
             vidaact -= other.gameObject.GetComponentInParent<Attack>().getDamage();
             //Comprobamos si sigue vivo
-            //Si su vida está por debajo de 0 lo eliminamos
+            if (vidaact <= 0) Destroy(gameObject);
 
-            //Si es el player reiniciamos la batalla. Todos recuperan su vida
-            if (gameObject.tag == "Player" && vidaact <= 0)
+            other.gameObject.GetComponentInParent<Attack>().Atacado();
+
+            Debug.Log(this.name + vidaact);
+        }
+
+        if (other.GetComponentInParent<EnemyComponent>() != null
+            && other.GetComponentInParent<EnemyComponent>().getAttacking())
+        {
+            Debug.Log("Pega el bicho");
+            vidaact -= other.GetComponentInParent<EnemyComponent>().getDamage();
+            if (vidaact <= 0)
             {
                 Reinicio();
                 other.gameObject.GetComponentInParent<Health>().Reinicio();
+
             }
-            else if (vidaact <= 0) Destroy(gameObject);
+            Debug.Log(this.name + vidaact);
         }
     }
 
