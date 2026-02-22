@@ -21,8 +21,8 @@ public class LevelManager : MonoBehaviour {
     public static LevelManager instance = null;
 
     // ----- DRAG AND DROP PHASE -----
-    // TODO CAMBIAR ESTO SEGÚN LAS NECESIDADES DE DISEÑO.
-    private static readonly int[] _piecesPerLevel = { 2, 3, 3 }; // piezas que hay por cada nivel ("array const")
+    // TODO CAMBIAR ESTO SEGï¿½N LAS NECESIDADES DE DISEï¿½O.
+    private static readonly int[] _piecesPerLevel = { 2, 2, 3 }; // piezas que hay por cada nivel ("array const")
 
     private int _nPieces; // numero de piezas draggables de este nivel (o de dropZones)
     private int _placedPieces; // piezas colocadas, incialmente cero.
@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour {
     
     void Start() {
         // numero del nivel. //TODO. NO HAY GM EN EL MENU DE PRUEBA, LO DEJO COMENTADO
-        int nLevel = 2; //GameManager.Instance.GetActLevel();
+        int nLevel = GameManager.Instance.GetActLevel();
 
         // inicialmente no hay piezas colocadas
         _placedPieces = 0;
@@ -72,7 +72,7 @@ public class LevelManager : MonoBehaviour {
     public void finish()
     {
         GameManager.Instance.SetLevel(GameManager.Instance.GetActLevel(), true);
-        //Volvemos al menú de los mapas
+        //Volvemos al menï¿½ de los mapas
         GameManager.Instance.LoadScene(0);
     }
 
@@ -92,32 +92,22 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void controlPhase(Phases p, bool activate) {
-        // iteramos por todos los transform de los hijos porque todos los objetos de unity tienes transform y tal
-        Transform fatherTF = _dragDropPhase.transform; // nota es drag drop hasta que en el switch se diga lo contrario...
-
         switch (p) {
             case Phases.DRAGDROP:
                 _dragDropPhase.SetActive(activate);
                 break;
             case Phases.ACTION:
-                fatherTF = _actionPhase.transform;
                 _actionPhase.SetActive(activate);
                 break;
             case Phases.RESOLUTION: 
-                fatherTF = _resolutionPhase.transform;
-                _resolutionPhase.SetActive(activate);
+               _resolutionPhase.SetActive(activate);
                 break;
             default:break;
         }
-        /*
-        for (int i = 0; i < fatherTF.childCount; i++) {
-            fatherTF.GetChild(i).gameObject.SetActive(activate); // elige si se esconde o se muestra.
-        }
-        */
     }
 
     // Si las piezas colocadas es igual al numero que habia de piezas inicialmente,
-    // que coincide con el numero de huecos también, quiere decir que todas las piezas
+    // que coincide con el numero de huecos tambiï¿½n, quiere decir que todas las piezas
     // han sido colocadas.
     private bool arePiecesPlaced() {
         return _placedPieces == _nPieces;
@@ -126,7 +116,7 @@ public class LevelManager : MonoBehaviour {
     // aumenta numero de piezas colocadas.
     private void increaseWellPlacedPieces()
     {
-        // este caso nunca debería suceder, pero lo hago por tener programación defensiva.
+        // este caso nunca deberï¿½a suceder, pero lo hago por tener programaciï¿½n defensiva.
         if (_placedPieces >= _nPieces) { _placedPieces = _nPieces; }
         else { _placedPieces++; }
     }
@@ -142,7 +132,7 @@ public class LevelManager : MonoBehaviour {
             return;
         }
 
-        // si es correcta y la zona está libre
+        // si es correcta y la zona estï¿½ libre
         if (drop.IsCorrectPiece(p) && !drop.IsOccupied)
         {
             // colocar
