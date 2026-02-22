@@ -23,13 +23,16 @@ public class Button : MonoBehaviour
 
     private int cont = 200;
 
-    private void Start()
+    private void Awake()
     {
         if (_camera == null)
             _camera = Camera.main;
         //La cámara comienza en el punto 0
         _camera.transform.position = Vector3.zero;
+    }
 
+    private void Start()
+    {
         camaraCerca = new Vector3(0, -0.7f, 4.44f);
         moving = false;
     }
