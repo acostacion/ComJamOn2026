@@ -1171,7 +1171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6329e77b2bbd04e8aba49aa0c6adac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
+  moveInput: {x: 0, y: 0}
   vel: 5
+  canFlip: 0
 --- !u!95 &1194625123
 Animator:
   serializedVersion: 7
