@@ -430,6 +430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Button
   sprite: {fileID: 0}
   _camera: {fileID: 1634110531}
+  _nScene: 0
 --- !u!1 &279781081 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4120958010760760187, guid: c6a994491512dcd4d9631b81f07f8de5, type: 3}
@@ -1142,7 +1143,8 @@ PrefabInstance:
       value: Cuerda
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1781996631715703078, guid: 11c3809626aee5a4182e0245a33f7a97, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7780178236227615247, guid: 11c3809626aee5a4182e0245a33f7a97, type: 3}
       insertIndex: -1
@@ -1618,6 +1620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
   vel: 5
+  canFlip: 0
 --- !u!143 &2058108741
 CharacterController:
   m_ObjectHideFlags: 0

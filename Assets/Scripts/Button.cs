@@ -1,15 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 public class Button : MonoBehaviour
 {
    [SerializeField] 
-   Sprite sprite; // TODO
+   Sprite sprite;
 
     [SerializeField] private Camera _camera;
 
     [SerializeField] private int _nScene;
+
+    [SerializeField] private int _nUI;
+
+
+    //Todo esto es para la animación de la cámara
+    private Vector3 camaraCerca;
+    private bool moving;
+    [SerializeField] private float smoothCamera;
+
+    private void Start()
+    {
+        //La cámara comienza en el punto 0
+        _camera.transform.position = Vector3.zero;
+
+        camaraCerca = new Vector3(0, -0.7f, 4.44f);
+        moving = false;
+    }
 
     public void Completado() // TODO
     {
@@ -31,9 +49,27 @@ public class Button : MonoBehaviour
         RaycastHit hit;
         bool isMouseIn = Physics.Raycast(ray, out hit);
 
-        if(isMouseIn && Mouse.current.leftButton.IsPressed())
+        if (_nScene != -1 && isMouseIn && Mouse.current.leftButton.IsPressed())
         {
+            //Cambia de escena cuando se pulsa
             ChangeScene(_nScene);
+        }
+        else if (_nScene == -1 && isMouseIn && Mouse.current.leftButton.IsPressed())
+        {
+            moving = true;
+            GetComponentInParent<Rigidbody>().
+                transform.parent.GetComponentInParent<Rigidbody>().isKinematic = false;
+
+            //Activamos la siguiente UI
+            GameManager.Instance.SetUi(_nUI);
+        }
+
+
+        //Movimiento de la cámara
+        if (moving)
+        {
+            _camera.transform.position = Vector3.Lerp(_camera.transform.position, camaraCerca, smoothCamera);
+            moving = _camera.transform.position != camaraCerca;
         }
     }
 }
