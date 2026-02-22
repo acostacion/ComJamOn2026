@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class TutorialComponent : MonoBehaviour
 {
     [Tooltip("Carteles en orden")]
-    public GameObject[] billboards;
+    public TutorialController[] billboards;
 
     [Tooltip("Tiempo en segundos que cada cartel permanece visible (0 = avanzar manualmente)")]
     public float displayTime = 0f;
@@ -12,12 +12,17 @@ public class TutorialComponent : MonoBehaviour
     private int currentIndex = -1;
     private float timer = 0f;
 
+    private bool waiting = false;
+
     void Start()
     {
         // Oculta todos los carteles al inicio
-        foreach (GameObject b in billboards)
+        foreach (TutorialController b in billboards)
         {
-            if (b != null) b.SetActive(false);
+            if (b != null)
+            {
+                b.InitializeHidden();
+            }
         }
 
         // Muestra el primer cartel
@@ -26,16 +31,16 @@ public class TutorialComponent : MonoBehaviour
 
     void Update()
     {
-        if (currentIndex >= 0 && currentIndex < billboards.Length && displayTime > 0)
+        if (waiting)
         {
-            timer += Time.deltaTime;
-            if (timer >= displayTime)
+            if (billboards[currentIndex].IsHidden())
             {
-                NextStep();
+                waiting = false;
+                ShowNext();
             }
+            return;
         }
 
-        // Permitir avanzar manualmente con tecla
         if (Keyboard.current.xKey.wasPressedThisFrame)
         {
             NextStep();
@@ -44,23 +49,23 @@ public class TutorialComponent : MonoBehaviour
 
     public void NextStep()
     {
-        // Oculta el cartel actual
         if (currentIndex >= 0 && currentIndex < billboards.Length)
         {
-            if (billboards[currentIndex] != null) billboards[currentIndex].SetActive(false);
+            billboards[currentIndex].Hide();
+            waiting = true;
+            return;
         }
 
-        // Avanza al siguiente
+        ShowNext();
+    }
+
+    void ShowNext()
+    {
         currentIndex++;
 
         if (currentIndex < billboards.Length)
-        {
-            if (billboards[currentIndex] != null) billboards[currentIndex].SetActive(true);
-            timer = 0f; // reinicia timer si usamos tiempo
-        }
+            billboards[currentIndex].Show();
         else
-        {
             Debug.Log("Tutorial completado!");
-        }
     }
 }
