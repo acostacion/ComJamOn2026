@@ -22,7 +22,7 @@ public class LevelManager : MonoBehaviour {
 
     // ----- DRAG AND DROP PHASE -----
     // TODO CAMBIAR ESTO SEGÚN LAS NECESIDADES DE DISEÑO.
-    private static readonly int[] _piecesPerLevel = { 3, 3, 3, 3 }; // piezas que hay por cada nivel ("array const")
+    private static readonly int[] _piecesPerLevel = { 2, 3, 3 }; // piezas que hay por cada nivel ("array const")
 
     private int _nPieces; // numero de piezas draggables de este nivel (o de dropZones)
     private int _placedPieces; // piezas colocadas, incialmente cero.

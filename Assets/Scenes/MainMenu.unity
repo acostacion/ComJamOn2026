@@ -1535,7 +1535,7 @@ PrefabInstance:
       objectReference: {fileID: 330585545}
     - target: {fileID: 1021436241312679896, guid: f2151b8047323cb47a013c0219e02ef3, type: 3}
       propertyPath: _nScene
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1906,7 +1906,7 @@ PrefabInstance:
       objectReference: {fileID: 330585545}
     - target: {fileID: 1021436241312679896, guid: f2151b8047323cb47a013c0219e02ef3, type: 3}
       propertyPath: _nScene
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4152657557988988012, guid: f2151b8047323cb47a013c0219e02ef3, type: 3}
       propertyPath: m_text

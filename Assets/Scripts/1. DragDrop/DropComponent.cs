@@ -9,8 +9,8 @@ public class DropComponent : MonoBehaviour
 
     public void PlaceObject(Transform obj)
     {
-        obj.position = transform.position;
-        obj.rotation = transform.rotation;
+        obj.position = transform.GetChild(0).position;
+        obj.rotation = transform.GetChild(0).rotation;
 
         IsOccupied = true;
     }
