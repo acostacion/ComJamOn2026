@@ -3,15 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - PlayerWeapon
+  - EnemyWeapon
+  - Plane
+  - Nivel
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ArmaPlayer
   - Water
   - UI
-  - 
+  - ArmaEnemigo
   - 
   - 
   - 

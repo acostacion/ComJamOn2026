@@ -46,9 +46,4 @@ public class Attack : MonoBehaviour
         triggerArma.SetActive(false);
         attacking=false;
     }
-
-    public void Atacado()
-    {
-        triggerArma.SetActive(false);
-    }
 }

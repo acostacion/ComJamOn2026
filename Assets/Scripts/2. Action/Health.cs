@@ -16,9 +16,9 @@ public class Health : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.transform.root == transform.root) return;
 
-        Debug.Log(this.name + vidaact);
         if (other.GetComponentInParent<Attack>() != null
             && other.GetComponentInParent<Attack>().getAttacking())
         { 
@@ -26,9 +26,11 @@ public class Health : MonoBehaviour
         
             vidaact -= other.gameObject.GetComponentInParent<Attack>().getDamage();
             //Comprobamos si sigue vivo
-            if (vidaact <= 0) Destroy(gameObject);
-
-            other.gameObject.GetComponentInParent<Attack>().Atacado();
+            if (vidaact <= 0)
+            {
+                Destroy(gameObject);
+                LevelManager.instance.setResolution();
+            }
 
             Debug.Log(this.name + vidaact);
         }

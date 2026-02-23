@@ -214,7 +214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &55630686
 Transform:
   m_ObjectHideFlags: 0
@@ -232,7 +232,6 @@ Transform:
   - {fileID: 1265093091}
   - {fileID: 2133039561}
   - {fileID: 2069071785}
-  - {fileID: 238529751}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &119200992
@@ -318,72 +317,6 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4120958010760760187, guid: c6a994491512dcd4d9631b81f07f8de5, type: 3}
   m_PrefabInstance: {fileID: 5360381317056053204}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &238529750
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 55630686}
-    m_Modifications:
-    - target: {fileID: 1576895395324595266, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-      propertyPath: m_Name
-      value: Bruja
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411032414860715773, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411032414860715773, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.85415995
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411032414860715773, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.73154926
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411032414860715773, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411032414860715773, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411032414860715773, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411032414860715773, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411032414860715773, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411032414860715773, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5411032414860715773, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7493032491866459232, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-      propertyPath: canFlip
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
---- !u!4 &238529751 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5411032414860715773, guid: 3934d419ad0b4874cbf559f1c1ba5b9b, type: 3}
-  m_PrefabInstance: {fileID: 238529750}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &244765009 stripped
 GameObject:
@@ -543,7 +476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &497387897
 Transform:
   m_ObjectHideFlags: 0
@@ -2962,6 +2895,7 @@ MonoBehaviour:
   _dragDropPhase: {fileID: 497387896}
   _actionPhase: {fileID: 55630685}
   _resolutionPhase: {fileID: 1702502723}
+  _player: {fileID: 2058108738}
 --- !u!4 &1682720860
 Transform:
   m_ObjectHideFlags: 0

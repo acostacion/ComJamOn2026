@@ -1,7 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,9 +16,8 @@ public class GameManager : MonoBehaviour
     //El primer nivel es el 1
     private Dictionary<int, bool> niveles;
 
-    private int level;  
-    [SerializeField] private GameObject[] Levels;
-    [SerializeField] private GameObject levels;
+    private int level;
+    [SerializeField] private GameObject[] levelsPrefab; 
 
     //Guardamos que menu estaba antes de cambiar de escena
     public enum menus
@@ -61,12 +61,17 @@ public class GameManager : MonoBehaviour
         switch (ui)
         {
             case (int)menus.MAP:
-                for (int i = 0; i < Levels.Length; i++)
+
+                Vector3 pos = new Vector3(-1.93f, -2.33f, 8.8f);
+                Quaternion rotacion = Quaternion.identity; // Sin rotación
+                for (int i = 0; i < levelsPrefab.Length; i++)
                 {
-                    Levels[i].SetActive(true);
+                    GameObject objInstanciado = Instantiate(levelsPrefab[i], pos, rotacion);
+                    pos.x *= -1;
                 }
                     
-            break;
+               
+                break;
         }
     }
 
@@ -95,10 +100,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         niveles = new Dictionary<int, bool>();
-
-        //Inicializamos la lista de los niveles
-        for (int i = 0; i < Levels.Length; i++)
-            niveles.Add(i + 1, false);
     }
 
     //Cargamos una escena nueva
@@ -109,7 +110,7 @@ public class GameManager : MonoBehaviour
         // cambia musica
         if (MusicManager.Instance != null)
             MusicManager.Instance.PlayMusicForScene(scene);
-
+        Debug.Log(level);
         SceneManager.LoadScene(scene);
     } 
 

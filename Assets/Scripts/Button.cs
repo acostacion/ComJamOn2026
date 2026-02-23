@@ -65,7 +65,10 @@ public class Button : MonoBehaviour
 
         Ray ray = _camera.ScreenPointToRay(mousePos);
         RaycastHit hit;
-        bool isMouseIn = Physics.Raycast(ray, out hit);
+        bool isMouseIn = Physics.Raycast(ray, out hit)
+            && hit.collider.gameObject == gameObject;
+
+
 
         //Movimiento de la cámara
         if (moving)
@@ -76,12 +79,13 @@ public class Button : MonoBehaviour
         else if (input) //Solo permitimos el input cuando termine la animacion
         {
             
-            if (_nScene != -1 && isMouseIn && Mouse.current.leftButton.IsPressed())
+            if (_nScene != -1 && isMouseIn && Mouse.current.leftButton.wasPressedThisFrame)
             {
                 //Cambia de escena cuando se pulsa
                 ChangeScene(_nScene);
+                
             }
-            else if (_nScene == -1 && isMouseIn && Mouse.current.leftButton.IsPressed())
+            else if (_nScene == -1 && isMouseIn && Mouse.current.leftButton.wasPressedThisFrame)
             {
                 moving = true;
                 if (GetComponentInParent<Rigidbody>())

@@ -11,9 +11,10 @@ public class LevelManager : MonoBehaviour {
     public GameObject _actionPhase;
     public GameObject _resolutionPhase;
     // NOTA: son publicas por si se necesitan en otro script.
+
     // ------------------
 
-    // [SerializeField] private GameObject _player; // jugador
+    [SerializeField] private GameObject _player; // jugador
 
     #endregion
 
@@ -64,11 +65,6 @@ public class LevelManager : MonoBehaviour {
         startLevel();
     }
 
-    private void Update()
-    {
-     
-    }
-
     public void finish()
     {
         GameManager.Instance.SetLevel(GameManager.Instance.GetActLevel(), true);
@@ -86,6 +82,7 @@ public class LevelManager : MonoBehaviour {
     // 3. RESOLUTION DESACTIVADA
     private void startLevel()
     {
+        _player.SetActive(false);
         controlPhase(Phases.DRAGDROP, true);
         controlPhase(Phases.ACTION, false);
         controlPhase(Phases.RESOLUTION, false);
@@ -154,6 +151,7 @@ public class LevelManager : MonoBehaviour {
             {
                 controlPhase(Phases.DRAGDROP, false);
                 controlPhase(Phases.ACTION, true);
+                _player.SetActive(true);
             }
         }
         else {
@@ -166,6 +164,13 @@ public class LevelManager : MonoBehaviour {
 
     // ----- ACTION PHASE -----
     #region Action
+
+    public void setResolution()
+    {
+        controlPhase(Phases.ACTION, false);
+        controlPhase(Phases.RESOLUTION, true);
+        _player.SetActive(false);
+    }
   
 
     #endregion
