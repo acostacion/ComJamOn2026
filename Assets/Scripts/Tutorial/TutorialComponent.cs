@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class TutorialComponent : MonoBehaviour
 {
     [Tooltip("Carteles en orden")]
-    public TutorialController[] billboards;
+    [SerializeField] private TutorialController[] billboards;
 
     [Tooltip("Tiempo en segundos que cada cartel permanece visible (0 = avanzar manualmente)")]
     public float displayTime = 0f;
